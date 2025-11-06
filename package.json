@@ -1,0 +1,19 @@
+{
+  "name": "dtk-cds",
+  "version": "0.0.1",
+  "description": "simple cd shortcut cli",
+  "license": "ISC",
+  "author": "daolicunha",
+  "type": "module",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "run:dev": "CDS_CONFIG_DIR=./temp_config_root node ./src/index.js" 
+  },
+  "bin": {
+    "cds": "src/index.js"
+  },
+  "devDependencies": {
+    "yargs": "^18.0.0"
+  }
+}
