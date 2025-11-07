@@ -8,12 +8,15 @@
   "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "run:dev": "CDS_CONFIG_DIR=./temp_config_root node ./src/index.js" 
+    "run:dev": "CDS_CONFIG_DIR=./temp_config_root node ./src/index.js"
   },
   "bin": {
     "cds": "src/index.js"
   },
   "devDependencies": {
     "yargs": "^18.0.0"
+  },
+  "dependencies": {
+    "cli-table3": "^0.6.5"
   }
 }

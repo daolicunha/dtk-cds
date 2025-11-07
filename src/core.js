@@ -6,6 +6,8 @@ import {
   updateShortcut,
 } from "./store.js";
 
+import Table from "cli-table3";
+
 /**
  * Returns the path for a shortcut.
  * @param {string} name - The shortcut name.
@@ -45,12 +47,25 @@ export async function addShortcut(name, path) {
 
 /**
  * Returns all the shortcuts available.
- * TODO: Format the output in a neat table.
  */
 export async function listShortcuts() {
-  console.log("Listing all your shortcuts!!");
   const shortcuts = await getAllShortcuts();
-  console.log(shortcuts);
+
+  let table = new Table({
+    head: ["Name", "Path"],
+    style: {
+      head: [],
+      border: [],
+    },
+  });
+
+  const shortcutEntries = Object.entries(shortcuts);
+
+  for (const [name, path] of shortcutEntries) {
+    table.push([name, path]);
+  }
+
+  console.log(table.toString());
 }
 
 /**
@@ -64,14 +79,23 @@ export async function deleteShortcut(query) {
 
 /**
  * Checks if the query (name or path) has a shortcut available.
- * TODO: Format the output in a neat table.
  * @param {string} query - The name or path to identify the shortcut.
  */
 export async function checkShortcut(query) {
-  console.log(`Checking if ${query} has a shortcut...`);
   const shortcut = await findShortcut(query);
-  console.log(`Found a shortcut for ${query}:`);
-  console.log(`${shortcut.name}: ${shortcut.path}`);
+
+  if (shortcut) {
+    let table = new Table({
+      head: ["Name", "Path"],
+      style: {
+        head: [],
+        border: [],
+      },
+    });
+    table.push([shortcut.name, shortcut.path]);
+    console.log("Found a shortcut!");
+    console.log(table.toString());
+  }
 }
 
 /**
