@@ -16,7 +16,7 @@ export async function goto(name) {
   console.log("Jumping to " + name);
   const shortcut = await findShortcut(name);
   console.log(shortcut);
-  const result = "cd " + shortcut.path;
+  const result = `cd '${shortcut.path}'`;
   return result;
 }
 
