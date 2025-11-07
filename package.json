@@ -1,9 +1,9 @@
 {
   "name": "dtk-cds",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "simple cd shortcut cli",
-  "license": "ISC",
-  "author": "daolicunha",
+  "license": "MIT",
+  "author": "Daniel Cunha <adm.renoirwelt@gmail.com>",
   "type": "module",
   "main": "src/index.js",
   "scripts": {
@@ -18,5 +18,10 @@
   },
   "dependencies": {
     "cli-table3": "^0.6.5"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/daolicunha/dtk-cds.git"
+  },
+  "homepage": "https://github.com/daolicunha/dtk-cds"
 }

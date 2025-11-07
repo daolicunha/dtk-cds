@@ -28,3 +28,21 @@ Use `-n` for updating the shortcut_name, leaving the path untouched.
 Use `-p` for updating just the shortcut_path.
 
 ## Install - TODO
+1. Install via npm:
+`npm install -g dtk-cds`
+
+2. Add the following to your shell:
+
+```bash
+function cds {
+    eval "$("dtk-cds" "$@")"
+}
+```
+
+For powershell:
+
+```powershell
+function cds {
+    iex (& dtk-cds $args)
+}
+```
