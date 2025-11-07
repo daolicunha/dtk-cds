@@ -11,7 +11,7 @@
     "run:dev": "CDS_CONFIG_DIR=./temp_config_root node ./src/index.js"
   },
   "bin": {
-    "cds": "src/index.js"
+    "dtk-cds": "src/index.js"
   },
   "devDependencies": {
     "yargs": "^18.0.0"

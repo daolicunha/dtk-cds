@@ -21,7 +21,7 @@ export async function loadShortcuts() {
     return shortcuts;
   } catch (e) {
     if (e.code === "ENOENT") {
-      console.log(
+      console.error(
         `${SHORTCUT_FILE} not found in standard location. Initializing new storage.`
       );
       return {};
@@ -57,7 +57,7 @@ export async function saveShortcuts(shortcuts) {
     const data = JSON.stringify(shortcuts, null, 4);
 
     await writeFile(SHORTCUT_FILE, data, { encoding: "utf8" });
-    console.log(`Shortcuts successfully saved to [${SHORTCUT_FILE}].`);
+    console.error(`Shortcuts successfully saved to [${SHORTCUT_FILE}].`);
   } catch (e) {
     console.error(`Error saving shortcuts:`, e);
   }
@@ -103,7 +103,7 @@ export async function deleteShortcut(query) {
   const shortcuts = await loadShortcuts();
   delete shortcuts[result.name];
   await saveShortcuts(shortcuts);
-  console.log(`Shortcut '${result.name}' successfully deleted.`);
+  console.error(`Shortcut '${result.name}' successfully deleted.`);
 }
 
 /**
@@ -119,7 +119,7 @@ export async function updateShortcut(query, newName, newPath) {
     return;
   }
   if (!newName && !newPath) {
-    console.log(
+    console.error(
       `Error: No update parameters provided for '${query}'. Use -n or -p.`
     );
     return;
@@ -133,13 +133,13 @@ export async function updateShortcut(query, newName, newPath) {
 
   if (newName && newName !== oldName) {
     if (shortcuts[newName]) {
-      console.log(`Error: new shortcut name '${newName} already in use.`);
+      console.error(`Error: new shortcut name '${newName} already in use.`);
       return;
     }
     shortcuts[newName] = oldPath;
     delete shortcuts[oldName];
-    console.log(`Renamed ${oldName} to ${newName}.`);
-    console.log(`Path remains as ${oldPath}`);
+    console.error(`Renamed ${oldName} to ${newName}.`);
+    console.error(`Path remains as ${oldPath}`);
     updated = true;
   }
 
@@ -147,7 +147,7 @@ export async function updateShortcut(query, newName, newPath) {
     // Support updating both key and value, if for some reason someone ends up providing both -p and -n
     const keyToUpdate = newName || oldName;
     shortcuts[keyToUpdate] = newPath;
-    console.log(
+    console.error(
       `Shortcut path for ${keyToUpdate} updated from ${oldPath} to ${newPath}`
     );
     updated = true;
@@ -156,6 +156,6 @@ export async function updateShortcut(query, newName, newPath) {
   if (updated) {
     await saveShortcuts(shortcuts);
   } else {
-    console.log("No changes made.");
+    console.error("No changes made.");
   }
 }

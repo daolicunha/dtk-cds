@@ -13,11 +13,12 @@ import Table from "cli-table3";
  * @param {string} name - The shortcut name.
  */
 export async function goto(name) {
-  console.log("Jumping to " + name);
   const shortcut = await findShortcut(name);
-  console.log(shortcut);
-  const result = `cd '${shortcut.path}'`;
-  return result;
+  if (!shortcut) {
+    return;
+  }
+
+  return `cd '${shortcut.path}'`;
 }
 
 /**
@@ -29,7 +30,7 @@ export async function addShortcut(name, path) {
   const shortcuts = await loadShortcuts();
 
   if (shortcuts[name]) {
-    console.log(
+    console.error(
       `Error: Shortcut name '${name}' already exists. Use 'update' to change its value.`
     );
     return;
@@ -37,7 +38,9 @@ export async function addShortcut(name, path) {
 
   const existingPaths = Object.values(shortcuts);
   if (existingPaths.includes(path)) {
-    console.log(`Error: Path '${path}' already has a shortcut assigned to it.`);
+    console.error(
+      `Error: Path '${path}' already has a shortcut assigned to it.`
+    );
     return;
   }
 
@@ -65,7 +68,7 @@ export async function listShortcuts() {
     table.push([name, path]);
   }
 
-  console.log(table.toString());
+  console.error(table.toString());
 }
 
 /**
@@ -73,7 +76,7 @@ export async function listShortcuts() {
  * @param {string} query - The name or path to identify the shortcut.
  */
 export async function deleteShortcut(query) {
-  console.log(`Deleting ${query} from shortcuts`);
+  console.error(`Deleting ${query} from shortcuts`);
   await deleteShortcut(query);
 }
 
@@ -93,8 +96,8 @@ export async function checkShortcut(query) {
       },
     });
     table.push([shortcut.name, shortcut.path]);
-    console.log("Found a shortcut!");
-    console.log(table.toString());
+    console.error("Found a shortcut!");
+    console.error(table.toString());
   }
 }
 

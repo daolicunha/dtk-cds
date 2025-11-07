@@ -24,8 +24,14 @@ yargs()
         describe: "Shortcut name",
       });
     },
-    (argv) => {
-      goto(argv.name);
+    async (argv) => {
+      const commandString = await goto(argv.name);
+
+      if (commandString) {
+        process.stdout.write(commandString);
+      }
+
+      process.exit(0);
     }
   )
 
@@ -119,6 +125,6 @@ yargs()
       updateEntry(argv.query, argv.name, argv.path);
     }
   )
-
+  .strict()
   .help()
   .parse(hideBin(process.argv));
