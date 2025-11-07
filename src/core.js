@@ -6,7 +6,10 @@ import {
   updateShortcut,
 } from "./store.js";
 
-// TODO: goto command
+/**
+ * Returns the path for a shortcut.
+ * @param {string} name - The shortcut name.
+ */
 export async function goto(name) {
   console.log("Jumping to " + name);
   const shortcut = await findShortcut(name);
