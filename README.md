@@ -39,10 +39,4 @@ function cds {
 }
 ```
 
-For powershell:
-
-```powershell
-function cds {
-    iex (& dtk-cds $args)
-}
-```
+For powershell: (TODO)
