@@ -1,6 +1,6 @@
 {
   "name": "dtk-cds",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "simple cd shortcut cli",
   "license": "MIT",
   "author": "Daniel Cunha <adm.renoirwelt@gmail.com>",
@@ -13,11 +13,9 @@
   "bin": {
     "dtk-cds": "src/index.js"
   },
-  "devDependencies": {
-    "yargs": "^18.0.0"
-  },
   "dependencies": {
-    "cli-table3": "^0.6.5"
+    "cli-table3": "^0.6.5",
+    "yargs": "^18.0.0"
   },
   "repository": {
     "type": "git",
