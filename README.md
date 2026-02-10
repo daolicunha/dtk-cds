@@ -3,10 +3,10 @@ A simple cd shortcut. Jump around the filesystem with simple, memorable shortcut
 
 ## Usage
 **Basic usage** - Jump to a saved shortcut:
-`cds <name>`
+`cds <name> [subdir]`
 
 ### Add a shortcut
-`cds add -n <name> -p <path>`
+`cds add <name> <path>`
 
 > note: you can pass the current path using `.`
 
