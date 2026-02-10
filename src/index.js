@@ -17,16 +17,18 @@ const __dirname = process.cwd();
 
 yargs()
   .command(
-    "$0 <name>",
+    "$0 <name> [subdir]",
     "Jump to shortcut",
     (yargs) => {
       yargs.positional("name", {
         describe: "Shortcut name",
+      }).positional("subdir",{
+        describe: "Subdirectory name or path",
       });
     },
     async (argv) => {
-      const commandString = await goto(argv.name);
-
+      const commandString = await goto(argv.name, argv.subdir);
+  
       if (commandString) {
         process.stdout.write(commandString);
       }

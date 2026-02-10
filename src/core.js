@@ -12,13 +12,14 @@ import Table from "cli-table3";
  * Returns the path for a shortcut.
  * @param {string} name - The shortcut name.
  */
-export async function goto(name) {
+export async function goto(name, subdir) {
   const shortcut = await findShortcut(name);
   if (!shortcut) {
     return;
   }
-
-  return `cd '${shortcut.path}'`;
+  if (subdir) {
+    return `cd '${shortcut.path}/${subdir}'`;
+  } else return `cd '${shortcut.path}'`;
 }
 
 /**
