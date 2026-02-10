@@ -27,7 +27,7 @@ Returns the name:path pair if there's an entry for the provided query (it can be
 Use `-n` for updating the shortcut_name, leaving the path untouched.
 Use `-p` for updating just the shortcut_path.
 
-## Install - TODO
+## Install
 1. Install via npm:
 `npm install -g dtk-cds`
 
@@ -38,5 +38,3 @@ function cds {
     eval "$("dtk-cds" "$@")"
 }
 ```
-
-For powershell: (TODO)
