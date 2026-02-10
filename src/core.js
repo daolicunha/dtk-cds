@@ -5,21 +5,36 @@ import {
   saveShortcuts,
   updateShortcut,
 } from "./store.js";
+import nodePath from "node:path";
+import fs from "node:fs";
 
 import Table from "cli-table3";
 
 /**
  * Returns the path for a shortcut.
  * @param {string} name - The shortcut name.
+ * @param {string} subdir - Optional subdirectory path for the shortcut.
  */
 export async function goto(name, subdir) {
   const shortcut = await findShortcut(name);
   if (!shortcut) {
     return;
   }
+  let combinedPath = shortcut.path;
   if (subdir) {
-    return `cd '${shortcut.path}/${subdir}'`;
-  } else return `cd '${shortcut.path}'`;
+    combinedPath = nodePath.join(shortcut.path, subdir);
+  }
+  let resolvedPath = nodePath.resolve(combinedPath);
+  try {
+    const stats = fs.statSync(resolvedPath);
+
+    if (stats.isFile()) {
+      return `xdg-open "${resolvedPath}"`;
+    } else return `cd "${resolvedPath}"`;
+  } catch (err) {
+    console.error(`[ERROR] ${err}`);
+  }
+
 }
 
 /**

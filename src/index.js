@@ -3,6 +3,8 @@
 
 // TODO: Nodejs init and load json file (or create one)
 import yargs from "yargs";
+import nodePath from "node:path";
+import os from "node:os";
 import { hideBin } from "yargs/helpers";
 import {
   addShortcut,
@@ -14,6 +16,7 @@ import {
 } from "./core.js";
 
 const __dirname = process.cwd();
+const homeDir = os.homedir();
 
 yargs()
   .command(
@@ -38,22 +41,29 @@ yargs()
   )
 
   .command(
-    "add",
+    "add <name> <path>",
     "Add a new shortcut",
-    {
-      name: {
-        alias: "n",
-      },
-      path: {
-        alias: "p",
-      },
+    (yargs) => {
+      yargs.positional("name", {describe: "Shortcut name"})
+      .positional("path", { describe: "Shortcut path" })
     },
     (argv) => {
       let path = argv.path;
-      if (argv.path == ".") {
-        path = __dirname;
+
+      // Resolve ~ expansion to user's homeDir
+      if (path.startsWith("~")) {
+        path = nodePath.join(homeDir, path.slice(1));
       }
-      addShortcut(argv.name, path);
+      
+      // Resolve . alias for cwd
+      if (path === ".") {
+        path = __dirname; 
+      }
+
+      // Force everything into absolute path
+      const finalPath = nodePath.resolve(process.cwd(), path);
+
+      addShortcut(argv.name, finalPath);
     }
   )
 
