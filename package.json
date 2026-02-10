@@ -1,6 +1,6 @@
 {
   "name": "dtk-cds",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "simple cd shortcut cli",
   "license": "MIT",
   "author": "Daniel Cunha <adm.renoirwelt@gmail.com>",
