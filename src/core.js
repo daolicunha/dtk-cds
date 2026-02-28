@@ -4,6 +4,7 @@ import {
   loadShortcuts,
   saveShortcuts,
   updateShortcut,
+  removeShortcut,
 } from "./store.js";
 import nodePath from "node:path";
 import fs from "node:fs";
@@ -93,7 +94,7 @@ export async function listShortcuts() {
  */
 export async function deleteShortcut(query) {
   console.error(`Deleting ${query} from shortcuts`);
-  await deleteShortcut(query);
+  await removeShortcut(query);
 }
 
 /**

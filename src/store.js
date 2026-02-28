@@ -92,7 +92,7 @@ export async function findShortcut(query) {
  * Deletes a shortcut entry based on either the name (key) or path (value).
  * @param {string} query - The name or path to identify the shortcut.
  */
-export async function deleteShortcut(query) {
+export async function removeShortcut(query) {
   const result = await findShortcut(query);
 
   if (!result) {
