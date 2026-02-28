@@ -1,6 +1,6 @@
 {
   "name": "dtk-cds",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "simple cd shortcut cli",
   "license": "MIT",
   "author": "Daniel Cunha <adm.renoirwelt@gmail.com>",
@@ -8,7 +8,7 @@
   "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "run:dev": "CDS_CONFIG_DIR=./temp_config_root node ./src/index.js"
+    "dev": "CDS_CONFIG_DIR=./temp_config_root node ./src/index.js"
   },
   "bin": {
     "dtk-cds": "src/index.js"
